@@ -35,10 +35,10 @@ class Mtiketmasuk extends Rsbt_Model
 			    foreach($q->result() as $k )
 				{
 			        $urut = ((int)$k->kd_max)+1;
-			        $kd = sprintf("US-0001", $urut);
+			        $kd = sprintf("US %04s", $urut);
 			    }
 			    }else{
-			        $kd = "US-0001";
+			        $kd = "0001";
 		    	}
 		    date_default_timezone_set('Asia/Jakarta');
 		    
@@ -48,6 +48,11 @@ class Mtiketmasuk extends Rsbt_Model
 	public function get_account($param = 0)
     {
       return $this->db->get_where('users', array('id_user' => $param))->row();
+    }
+
+   	public function kate($param = 0)
+    {
+      return $this->db->get_where('category', array('id_kategori' => $param))->row();
     }
 
     public function join($param = 0)

@@ -3,7 +3,6 @@
   <div class="panel-heading" style="font-size: 18px"><b>Data Tiket Masuk</b> 
     <div class="pull-right"><a href="#tm-add" data-toggle="modal"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus-square">  Tambah</i></button></a></div>
   </div>
-<pre><?php print_r($data) ?></pre>
     <div class="panel-body">
         <table id="example1" class="table table-bordered table-striped">
           <thead>
@@ -18,17 +17,17 @@
           </tr>
           </thead>
           <tbody>
-
+          <?php foreach ($data as $key => $row): ?>
           <tr>
-            <td>1</td>
-            <td>US-001</td>
-            <td>Sungai Liat</td>
-            <td> 4</td>
-            <td>Sungai Liat</td>
-            <td> 4</td>
+            <td align="center"><?php echo ++$key ?></td>
+            <td><?php echo $row->id_masuk ?></td>
+            <td><?php echo $row->tanggal ?></td>
+            <td><?php echo $this->Mtiketmasuk->get_account($row->id_user)->nama; ?></td>
+            <td><?php echo $this->Mtiketmasuk->kate($row->id_kategori)->isi_kategori; ?></td>
+            <td><?php echo $row->deskripsi ?></td>
             <td><div class="btn btn-sm btn-warning">Proses</div></td>
           </tr>
-          
+          <?php endforeach ?>
           </tbody>
           <tfoot>
           <tr>
@@ -90,13 +89,13 @@
       <div class="panel-footer">
           <button type="submit" class="btn btn-sm btn-primary"><span class="fa fa-save"></span> Simpan</button></div>
       </div>
-  </div>
+
 </form>
+  </div>
         <script>
           $('#datepicker').datetimepicker({
           locale:'id',
           });
         </script>
-    </div>
-  </div>
+
 <!--Add Modal -->
