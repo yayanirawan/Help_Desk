@@ -115,6 +115,4 @@ $('#datepicker').datetimepicker({
 locale:'id',
 });
 </script>
-    </div>
-  </div>
 <!--Add Modal -->
