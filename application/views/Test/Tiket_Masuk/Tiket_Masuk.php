@@ -13,6 +13,7 @@
             <th>Cabang</th>
             <th>Kategori</th>
             <th>Masalah</th>
+            <th>Keluhan</th>
             <th>Aksi</th>
           </tr>
           </thead>
@@ -25,37 +26,52 @@
             <td><?php echo $this->Mtiketmasuk->get_account($row->id_user)->nama; ?></td>
             <td><?php echo $this->Mtiketmasuk->kate($row->id_kategori)->isi_kategori; ?></td>
             <td><?php echo $row->deskripsi ?></td>
-            <td><div class="btn btn-sm btn-warning">Proses</div></td>
+            <td>
+              <a  class="btn btn-1x btn-warning" id="lihat-gambar1" data-src="<?php echo base_url('assets/images/documen/'.$row->foto) ?>">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+              </a>
+            </td>
+            <td>
+            <a href="#tm-proses1" data-toggle="modal" class="btn btn-1x btn-warning">Proses</a>
+            </td>
           </tr>
           <?php endforeach ?>
+          <script>
+            $('a#lihat-gambar1').unbind().click(function(argument) {
+              $('div#exampleModalCenter').modal('show');
+              $('img#setImage').attr('src', $(this).data('src'))
+            })
+          </script>
+          <!-- Modal Gambar -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">    
+            <img width="100%" src="" id="setImage" class="img-rounded" alt="User Image">
+            </div>
+          </div>
           </tbody>
-          <tfoot>
-          <tr>
-            <th>No</th>
-            <th>ID Tiket</th>
-            <th>Tanggal</th>
-            <th>Cabang</th>
-            <th>Kategori</th>
-            <th>Masalah</th>
-            <th>Aksi</th>
-          </tr>
-          </tfoot>
+
         </table>
         </div>
       </div>
-       <!-- /.panel -->
-<!--Add Modal -->
- <div id="tm-add" class="modal fade" role="dialog">
-    <div class="modal-dialog">
 
- <form action="<?php echo current_url() ?>" method="post" method="post" enctype="multipart/form-data">> -->
+<!--Add Tiket Masuk -->
+<div id="tm-add" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+<?php  
+/**
+ * Open Form
+ *
+ * @var string
+ **/
+echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
+?>
   <div class="panel panel-default">
       <div class="panel-heading bg-success">
           <h8 class="modal-title"><i class="fa fa-plus-square"><b> Entry Tiket</b></i></h8>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
            <input type="hidden" name="id_user" class="form-control" value="<?php echo $get->id_user; ?>">
       </div>
-
       <div class="panel-body">
               <div class="col-sm-12">
                 <div class="form-group">
@@ -79,23 +95,48 @@
                  <p class="help-block"><?php echo form_error('deskripsi', '<small class="text-danger">', '</small>'); ?></p>
 
                 <div class="form-group">
-                  <label for="lampiran"><b>Lampiran</b></label>
-                  <input name="file" type="file" class="form-control" placeholder="Lampiran">
-
+                  <label for="foto"><b>Lampiran</b></label>
+                  <input type="file" name="foto" class="form-control">
                 </div>
-                <p class="help-block"><?php echo form_error('lampiran', '<small class="text-red">', '</small>'); ?></p>
+                
         </div>
       </div>
       <div class="panel-footer">
-          <button type="submit" class="btn btn-sm btn-primary"><span class="fa fa-save"></span> Simpan</button></div>
+          <button type="submit" class="btn btn-sm btn-primary"><span class="fa fa-save"></span> Simpan</button>
       </div>
-
-</form>
   </div>
-        <script>
-          $('#datepicker').datetimepicker({
-          locale:'id',
-          });
-        </script>
+<?php  
+// End Form
+echo form_close();
+?>
+</div>
+<!--tutup Tiket Masuk -->
 
-<!--Add Modal -->
+<!--Add Tiket proses -->
+<div id="tm-proses1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+<?php  
+/**
+ * Open Form
+ *
+ * @var string
+ **/
+echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
+?>
+  <div class="panel panel-default">
+      <div class="panel-heading bg-success">
+          
+      </div>
+      <div class="panel-body">
+              
+      </div>
+      <div class="panel-footer">
+          <button type="submit" class="btn btn-sm btn-primary"><span class="fa fa-save"></span> Simpan</button>
+      </div>
+  </div>
+<?php  
+// End Form
+echo form_close();
+?>
+</div>
+<!--tutup Tiket Masuk -->

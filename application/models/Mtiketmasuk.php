@@ -66,24 +66,23 @@ class Mtiketmasuk extends Rsbt_Model
 		return $this->db->get('t_masuk')->result();
 	}
 
-   public function create()
+   public function create1()
 	{
 
-		// $config['upload_path'] = './assets/images/documen/';
-		// $config['allowed_types'] = 'gif|jpg|JPG|png|pdf|PDF|jpeg|JPEG';
-		// $config['max_size']  = '5120';
-		// $config['max_width']  = '4000';
-		// $config['max_height']  = '3000';
+		$config['upload_path'] = './assets/images/documen/';
+		$config['allowed_types'] = 'gif|jpg|JPG|png|pdf|PDF|jpeg|JPEG';
+		$config['max_size']  = '5120';
+		$config['max_width']  = '4000';
+		$config['max_height']  = '3000';
 		
-		// $this->upload->initialize($config);
-
-		// if($this->upload->do_upload('file')) 
-		// {
-		// 	$file = $this->upload->file_name;
-		// } else 
-		// {
-		// 	$file = 'No Berkas';
-		// }
+		$this->upload->initialize($config);
+		
+		if($this->upload->do_upload('foto')) 
+		{
+			$foto = $this->upload->file_name;
+		} else {
+			$foto = 'No Images';
+		}
 
 		$tgl=date('Y-m-d');
 
@@ -93,8 +92,9 @@ class Mtiketmasuk extends Rsbt_Model
 			'id_kategori' => $this->input->post('id_kategori'),
 			'deskripsi' => $this->input->post('deskripsi'),
 			'tanggal' => $tgl,
-			// 'file' => $file
-		);
+			'foto' => $foto,
+			
+			);
 
 		$this->db->insert('t_masuk', $masuk);
 
